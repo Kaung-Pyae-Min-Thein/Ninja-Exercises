@@ -1,42 +1,56 @@
-let form = document.querySelector('.quiz-form');
-let result = document.querySelector('.result');
-let correctAns = ["B", "B", "B", "B"];
+const addForm = document.querySelector('.addForm');
+const todos = document.querySelector('.todos');
+const search = document.querySelector('.search input');
 
-form.addEventListener("submit", e => {
+//generate html list
+const todoList = todo => {
+  const HTML = `
+  <li class="list-group-item d-flex align-items-center justify-content-between">
+    <span>${todo}</span>
+    <i class="fa-solid fa-trash-can delete"></i>
+  </li>`;
+
+  todos.innerHTML += HTML;
+
+};
+
+//add todo
+addForm.addEventListener('submit', e => {
   e.preventDefault();
+  let todo = addForm.add.value.trim();
 
-  let score = 0;
-  let userAnswers = [form.q1.value, form.q2.value, form.q3.value, form.q4.value];
+  if (todo.length) {
+    todoList(todo);
+    addForm.reset();
+  }
 
-  //check answer
-  userAnswers.forEach((userans, index) => {
-    if (userans === correctAns[index]) {
-      score += 25;
-    }
-  });
+});
 
+//delete event
+todos.addEventListener('click', e => {
+  if (e.target.classList.contains('delete')) {
+    e.target.parentElement.remove();
+  }
 
+});
 
-  //show result div
-  result.classList.remove('d-none');
-  //scroll to top
-  window.scrollTo(0, 0);
+//filter and add & delete class
+const filterList = input => {
 
-  //animate the percentage
-  let output = 0;
-  //call interval callback function every 100 millisecond
-  let timer = setInterval(() => {
-    //update the score
-    result.querySelector("span").textContent = `${output}%`;
-    //check to terminate setInterval function or continue
-    if (output === score) {
-      clearInterval(timer);
-    }
-    else {
-      output++;
-    }
-  }, 10);
+  Array.from(todos.children)
+    .filter(todo => !todo.textContent.toLowerCase().includes(input))
+    .forEach(todo => todo.classList.add('filter'));
 
+  Array.from(todos.children)
+    .filter(todo => todo.textContent.toLowerCase().includes(input))
+    .forEach(todo => todo.classList.remove('filter'));
 
-  console.log(score);
+};
+
+//search keyup
+search.addEventListener('keyup', _ => {
+  console.log(search.value);
+  const input = search.value.trim().toLowerCase();
+  filterList(input);
+
 });
