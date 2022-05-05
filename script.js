@@ -1,35 +1,16 @@
-const getTodos = (resource) => {
+fetch('todos/kaung.json')
 
-  return new Promise((resolve, reject) => {
-    const HttpReq = new XMLHttpRequest();
+  .then(response => {
+    if (response.status === 200) {
+      console.log("resolved");
+      console.log(response);
 
-    HttpReq.open("GET", resource);
-    HttpReq.send();
-
-    HttpReq.addEventListener('readystatechange', () => {
-      if (HttpReq.status === 200 && HttpReq.readyState === 4) {
-        const data = JSON.parse(HttpReq.responseText);
-        resolve(data);
-      }
-      else if (HttpReq.readyState === 4) {
-        reject("Error in fetching data");
-      }
-    });
-  });
-};
-
-getTodos("todos/kaung.json")
-  .then(data => {
-
-    console.log("first resolve", data);
-    return getTodos('todos/luigi.json');
+    }
+    return response.json();
   })
+
   .then(data => {
-    console.log("second resolve", data);
+    console.log(data);
   })
-  .catch(err => {
-    console.log(err);
-  });
 
-
- // req.open("GET", 'https://jsonplaceholder.typicode.com/todos/');
+  .catch(err => console.log(err));
