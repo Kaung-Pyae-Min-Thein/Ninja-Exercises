@@ -1,16 +1,14 @@
-fetch('todos/kaung.json')
+const getTodos = async () => {
 
-  .then(response => {
-    if (response.status === 200) {
-      console.log("resolved");
-      console.log(response);
+  const response = await fetch('todos/luigi.json');
+  if (response.status !== 200) {
+    throw new Error("cannot fetch the API");
+  }
+  const data = await response.json();
 
-    }
-    return response.json();
-  })
+  return data;
+};
 
-  .then(data => {
-    console.log(data);
-  })
-
-  .catch(err => console.log(err));
+getTodos()
+  .then(data => console.log('resolved', data))
+  .catch(err => console.log("rejected", err.message));
