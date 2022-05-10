@@ -19,10 +19,6 @@ const UpdateWeather = async (city) => {
 
 const UpdateUI = ({ CityData, Weather }) => {
 
-
-
-
-
   details.innerHTML = `
         <h2 class="h5">${CityData.EnglishName}</h2>
         <div>${Weather.WeatherText}</div>
@@ -49,9 +45,18 @@ CityInput.addEventListener('submit', e => {
   e.preventDefault();
 
   const city = CityInput.city.value.trim();
+  CityInput.reset();
 
   UpdateWeather(city)
     .then(data => UpdateUI(data))
     .catch(err => console.log(err));
 
+  //localstorage
+  localStorage.setItem('city', city);
 });
+
+if (localStorage.getItem('city')) {
+  UpdateWeather(localStorage.getItem('city'))
+    .then(data => UpdateUI(data))
+    .catch(error => console.log(error));
+}
