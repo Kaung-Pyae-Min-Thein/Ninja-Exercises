@@ -4,17 +4,7 @@ const icon = document.querySelector('.icon img');
 const details = document.querySelector('.details');
 const card = document.querySelector('.card');
 
-const UpdateWeather = async (city) => {
-  const location = await getCity(city);
-
-  const Weather = await getWeather(location.Key);
-
-
-  return {
-    CityData: location,
-    Weather
-  };
-};
+const forecast = new Forecast();
 
 
 const UpdateUI = ({ CityData, Weather }) => {
@@ -22,7 +12,6 @@ const UpdateUI = ({ CityData, Weather }) => {
   details.innerHTML = `
         <h2 class="h5">${CityData.EnglishName}</h2>
         <div>${Weather.WeatherText}</div>
-
         <div class="display-6 my-4">
           <span>${Weather.Temperature.Metric.Value}</span>
           <span>&deg;C</span>
@@ -47,7 +36,7 @@ CityInput.addEventListener('submit', e => {
   const city = CityInput.city.value.trim();
   CityInput.reset();
 
-  UpdateWeather(city)
+  forecast.UpdateWeather(city)
     .then(data => UpdateUI(data))
     .catch(err => console.log(err));
 
@@ -56,7 +45,7 @@ CityInput.addEventListener('submit', e => {
 });
 
 if (localStorage.getItem('city')) {
-  UpdateWeather(localStorage.getItem('city'))
+  forecast.UpdateWeather(localStorage.getItem('city'))
     .then(data => UpdateUI(data))
     .catch(error => console.log(error));
 }
