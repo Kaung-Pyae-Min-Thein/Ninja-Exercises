@@ -12,106 +12,30 @@
 </head>
 
 <body>
-  <!-- header section -->
-  <header class="heading py-3 bg-light text-center">
-    <section class="container-fluid">
-      <h1 class="text-primary display-4 my-4">Ninja Quiz</h1>
-    </section>
-  </header>
 
-  <!--result Section -->
-  <section class="result py-4 bg-light text-center d-none">
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
 
-    <div class="container-fluid lead">
-      <p>You are <span class="text-primary display-4 p3">0%</span> Ninja</p>
-    </div>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCN2CPK9FpYKkVLy1CNM-YSYVu93x6fa5Q",
+      authDomain: "ninja-db-20c70.firebaseapp.com",
+      projectId: "ninja-db-20c70",
+      storageBucket: "ninja-db-20c70.appspot.com",
+      messagingSenderId: "318222695629",
+      appId: "1:318222695629:web:a0ef3af3ceb3f40b97bd84",
+      measurementId: "G-GFS9796FNJ"
+    };
 
-  </section>
-
-  <!-- question section -->
-  <article class="bg-primary">
-    <section class="container-fluid">
-      <h2 class="text-white my-5">On with the Questions......</h2>
-
-
-      <!-- form -->
-      <form class="quiz-form text-light">
-
-        <div class="my-5">
-          <p class="lead fw-normal">1. How do you give a ninja direction?</p>
-
-          <!-- form check -->
-          <div class="form-check text-white-50">
-            <input type="radio" name="q1" value="A" checked>
-            <label>Show them a map</label>
-          </div>
-
-          <div class="form-check text-white-50">
-            <input type="radio" name="q1" value="B">
-            <label>Show them a map</label>
-          </div>
-
-        </div>
-
-        <div class="my-5">
-          <p class="lead fw-normal">2. What?</p>
-
-          <!-- form check -->
-          <div class="form-check text-white-50">
-            <input type="radio" name="q2" value="A" checked>
-            <label>Show them a map</label>
-          </div>
-
-          <div class="form-check text-white-50">
-            <input type="radio" name="q2" value="B">
-            <label>Show them a map</label>
-          </div>
-
-        </div>
-
-        <div class="my-5">
-          <p class="lead fw-normal">3. When?</p>
-
-          <!-- form check -->
-          <div class="form-check text-white-50">
-            <input type="radio" name="q3" value="A" checked>
-            <label>Show them a map</label>
-          </div>
-
-          <div class="form-check text-white-50">
-            <input type="radio" name="q3" value="B">
-            <label>Show them a map</label>
-          </div>
-
-        </div>
-
-        <div class="my-5">
-          <p class="lead fw-normal">4. What?</p>
-
-          <!-- form check -->
-          <div class="form-check text-white-50">
-            <input type="radio" name="q4" value="A" checked>
-            <label>Show them a map</label>
-          </div>
-
-          <div class="form-check text-white-50">
-            <input type="radio" name="q4" value="B">
-            <label>Show them a map</label>
-          </div>
-
-        </div>
-
-
-        <div class="text-center">
-          <input type="submit" class="btn btn-light">
-        </div>
-
-
-      </form>
-
-    </section>
-  </article>
-
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
   <script src="script.js"></script>
 </body>
 
